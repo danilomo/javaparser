@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
- * Copyright (C) 2011, 2013-2020 The JavaParser Team.
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2020 The JavaParser Team.
  *
  * This file is part of JavaParser.
  *
@@ -18,25 +18,19 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  */
-package com.github.javaparser.resolution;
+package com.github.javaparser.symbolsolver;
 
-import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.resolution.types.ResolvedType;
 import java.util.Optional;
 
-public interface SymbolResolver {
+/**
+ *
+ * @author Danilo Oliveira
+ * @param <T>
+ */
+public interface SolvingStrategy<T extends Expression> {
 
-    /**
-     * For a reference it would find the corresponding declaration.
-     */
-    <T> T resolveDeclaration(Node node, Class<T> resultClass);
-
-    /**
-     * For types it would find the corresponding resolved types.
-     */
-    <T> T toResolvedType(Type javaparserType, Class<T> resultClass);
-
-    ResolvedType calculateType(Expression expression);   
+    Optional<ResolvedType> resolveType(T expr);
+    
 }

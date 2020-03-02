@@ -39,9 +39,33 @@ import java.util.Map;
  */
 public interface ResolvedType {
 
+    /**
+     * Null object constant for a not resolved type
+     */ 
+    public static final ResolvedType NOT_RESOLVED = new ResolvedType() {
+        @Override
+        public boolean isArray() {
+            return false;
+        }
+
+        @Override
+        public String describe() {
+            return "<NOT RESOLVED>";
+        }
+
+        @Override
+        public String toString() {
+            return describe();
+        }               
+
+        @Override
+        public boolean isAssignableBy(ResolvedType other) {
+            return false;
+        }
+    };
     ///
     /// Relation with other types
-    ///
+    ///    
 
     /**
      * Does this type represent an array?
